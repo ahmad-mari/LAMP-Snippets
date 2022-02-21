@@ -1,0 +1,75 @@
+Centos Golden Image 
+# Updating to latest Centos point release
+
+sudo yum update -y 
+sudo reboot
+package-cleanup -q --leaves | xargs -l1 yum -y remove 
+
+# Increase sudo timeout to 60 mins, instead of nagging every 5 mins for password
+sudo visudo
+	Change 
+	Defaults        env_reset
+	To
+	Defaults        env_reset, timestamp_timeout=60
+#OS Optimization 
+sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+sed -i 's/installonly_limit=5/installonly_limit=2/g' /etc/yum.conf
+
+# Install usefull tools
+yum install -y epel-release ImageMagick nano net-tools nano yum-utils wget rsync git make iotop unzip iperf3 mlocate tree curl zip lsof mc
+yum install -y p7zip glances ncdu nload htop ccrypt python3
+wget http://www.home.unix-ag.org/simon/woof
+sudo cp woof /usr/bin/
+chmod 777 /usr/bin/woof 
+rm -rf woof 
+sudo timedatectl set-timezone Asia/Amman
+
+# Install LAMP Stack
+# Apache/2.4.6 (CentOS)
+# PHP 7.2.30
+# MySQL Ver 15.1 Distrib 5.5.64-MariaDB (use sudo mysql to access the mysql shell)
+
+sudo yum -y install httpd
+sudo systemctl start httpd.service && sudo systemctl enable httpd.service
+sudo yum -y install mariadb-server mariadb
+sudo systemctl start mariadb && sudo systemctl enable mariadb.service
+sudo yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum-config-manager --enable remi-php72
+sudo yum install -y php72
+
+# Installing PHP modules
+sudo yum install -y  php72-php-fpm php72-php-gd php72-php-json php72-php-mbstring php72-php-mysqlnd php72-php-xml php72-php-xmlrpc php72-php-opcache php-mysql php-common php-pear php-devel gcc ImageMagick-devel ImageMagick-perl php-curl php-imap php-intl php-bcmath php-tidy php-xmlrpc php-readline php-enchant php-zip mod_ssl
+
+# Install composer
+sudo curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+sudo ln -s /usr/local/bin/composer /usr/bin/composer
+
+# Drush install 
+sudo git clone https://github.com/drush-ops/drush.git /usr/local/src/drush
+cd /usr/local/src/drush
+
+# For Version 8
+sudo git checkout 8.3.0
+# For Version 9
+sudo git checkout 9.7.1
+
+sudo ln -sf /usr/local/src/drush/drush /usr/bin/drush
+sudo composer install
+
+# Memcache install 
+
+yum install -y libevent libevent-devel memcached php-pecl-memcache
+#To adjust memcache options
+sudo nano /etc/sysconfig/memcached
+
+# You can view Memcache Admin settings using a tool called Memcache Top:
+# wget https://github.com/eculver/memcache-top/archive/v0.7.zip
+
+#Create Swap File with capacity of 8GB
+
+sudo dd if=/dev/zero of=/swap count=8192 bs=1MiB
+sudo chmod 600 /swap
+sudo mkswap /swap
+sudo swapon /swap
+free -m
