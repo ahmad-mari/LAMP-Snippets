@@ -1,6 +1,6 @@
 Ubuntu Golden Image
 
-"Ubuntu 18.04.3 LTS"		# cat /etc/lsb-release 					# Updated=20-April-2020
+"Ubuntu 20.04.3 LTS"		# cat /etc/lsb-release 					# Updated=19-July-2022
 
 # Updating to latest Ubuntu point release
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
@@ -21,8 +21,8 @@ sudo timedatectl set-timezone Asia/Amman
 
 # Install LAMP Stack
 # Apache/2.4.29
-# PHP 7.2.11
-# MySQL 5.7.24 (use sudo mysql to access the mysql shell)
+# PHP 7.4.11
+# MySQL 5.7.38 (use sudo mysql to access the mysql shell)
 sudo tasksel install lamp-server
 
 # Enable self signed https protocol
@@ -32,9 +32,9 @@ sudo systemctl restart apache2
 
 # Installing PHP modules
 sudo apt install php -y
-sudo apt install php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-mysql php7.2-xml php7.2-cgi php7.2-cli php7.2-common php7.2-curl php7.2-gd php7.2-imap php7.2-intl php7.2-pspell php7.2-sqlite3 php7.2-tidy php7.2-opcache php7.2-json php7.2-bz2 php7.2-readline php7.2-xmlrpc php7.2-enchant php7.2-xsl php-all-dev php7.2-zip php7.2-bcmath php7.2-imagick -y
+sudo apt install php7.4 libapache2-mod-php7.4 php7.4-mbstring php7.4-mysql php7.4-xml php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl php7.4-pspell php7.4-sqlite3 php7.4-tidy php7.4-opcache php7.4-json php7.4-bz2 php7.4-readline php7.4-xmlrpc php7.4-enchant php7.4-xsl php-all-dev php7.4-zip php7.4-bcmath php7.4-imagick -y
 
-sudo a2enmod php7.2 && sudo systemctl restart apache2
+sudo a2enmod php7.4 && sudo systemctl restart apache2
 sudo a2enmod headers rewrite env mime expires ssl 
 sudo systemctl restart apache2
 
@@ -73,8 +73,8 @@ sudo nano /etc/memcached.conf
 -------------------------------------------------------------------------------------------
 
 ###  Config
-## php.ini (/etc/php/7.2/apache2/php.ini)
-sudo nano /etc/php/7.2/apache2/php.ini
+## php.ini (/etc/php/7.4/apache2/php.ini)
+sudo nano /etc/php/7.4/apache2/php.ini
 max_execution_time = 300
 max_input_time = 180
 max_input_vars = 10000
@@ -85,8 +85,8 @@ upload_max_filesize = 64M
 max_file_uploads = 40
 date.timezone = Asia/Amman
 
-## opcache.ini (/etc/php/7.2/apache2/conf.d/10-opcache.ini)
-sudo nano /etc/php/7.2/apache2/conf.d/10-opcache.ini
+## opcache.ini (/etc/php/7.4/apache2/conf.d/10-opcache.ini)
+sudo nano /etc/php/7.4/apache2/conf.d/10-opcache.ini
 opcache.enable=1
 opcache.enable_cli=0
 opcache.memory_consumption=512
