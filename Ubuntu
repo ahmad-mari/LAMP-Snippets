@@ -103,7 +103,7 @@ exit
 # Login using sudo mysql -uroot -p
 
 ## In Drupal 8 sites Memcache example:
-nano /var/aegir/projects/hazaa8/stg/docroot/sites/hazaa8.stg.srv05.devcloud.vardot.io/settings.php
+nano /var/www/site/settings.php
 $settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
 $settings['memcache']['bins'] = ['default' => 'default'];
 $settings['memcache']['key_prefix'] = '';
