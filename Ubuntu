@@ -77,8 +77,8 @@ sudo nano /etc/memcached.conf
 -------------------------------------------------------------------------------------------
 
 ###  Config
-## php.ini (/etc/php/7.4/apache2/php.ini)
-sudo nano /etc/php/7.4/apache2/php.ini
+## php.ini (/etc/php/8.1/apache2/php.ini)
+sudo nano /etc/php/8.1/apache2/php.ini
 max_execution_time = 300
 max_input_time = 180
 max_input_vars = 10000
@@ -89,8 +89,8 @@ upload_max_filesize = 64M
 max_file_uploads = 40
 date.timezone = Asia/Amman
 
-## opcache.ini (/etc/php/7.4/apache2/conf.d/10-opcache.ini)
-sudo nano /etc/php/7.4/apache2/conf.d/10-opcache.ini
+## opcache.ini (/etc/php/8.1/apache2/conf.d/10-opcache.ini)
+sudo nano /etc/php/8.1/apache2/conf.d/10-opcache.ini
 opcache.enable=1
 opcache.enable_cli=0
 opcache.memory_consumption=512
