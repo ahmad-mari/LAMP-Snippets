@@ -16,8 +16,10 @@ sudo visudo
 	Defaults        env_reset, timestamp_timeout=60
 
 # Install usefull tools
-sudo apt-get install  -y imagemagick tasksel net-tools htop nano yum-utils wget rsync git ncdu nload ranger iotop mdadm unzip iperf3 mlocate tree p7zip p7zip-full  p7zip-rar glances curl unzip zip woof -y
+sudo apt-get install  -y imagemagick tasksel net-tools htop nano wget rsync git ncdu nload ranger iotop mdadm unzip iperf3 mlocate tree p7zip p7zip-full  p7zip-rar glances curl unzip zip -y
 sudo timedatectl set-timezone Asia/Amman
+wget http://www.home.unix-ag.org/simon/woof
+sudo cp woof /usr/bin/
 
 # Install LAMP Stack
 # Apache/2.4.29
