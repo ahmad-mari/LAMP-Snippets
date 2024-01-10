@@ -23,20 +23,20 @@ sudo cp woof /usr/bin/
 
 # Install LAMP Stack
 # Apache/2.4.29
-# PHP 7.4.11
+# PHP 8.1
 # MySQL 5.7.38 (use sudo mysql to access the mysql shell)
-sudo tasksel install lamp-server
+
+sudo apt install apache2
 
 # Enable self signed https protocol
 sudo a2enmod ssl 
-sudo a2ensite default-ssl
 sudo systemctl restart apache2
 
 # Installing PHP modules
 sudo apt install php -y
-sudo apt install php7.4 libapache2-mod-php7.4 php7.4-mbstring php7.4-mysql php7.4-xml php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl php7.4-pspell php7.4-sqlite3 php7.4-tidy php7.4-opcache php7.4-json php7.4-bz2 php7.4-readline php7.4-xmlrpc php7.4-enchant php7.4-xsl php-all-dev php7.4-zip php7.4-bcmath php7.4-imagick -y
+sudo apt install php libapache2-mod-php php-mbstring php-mysql php-xml php-cgi php-cli php-common php-curl php-gd php-imap php-intl php-pspell php-sqlite3 php-tidy php-opcache php-json php-bz2 php-readline php-xmlrpc php-enchant php-xsl php-all-dev php-zip php-bcmath php-imagick -y
 
-sudo a2enmod php7.4 && sudo systemctl restart apache2
+sudo a2enmod php8.1 && sudo systemctl restart apache2
 sudo a2enmod headers rewrite env mime expires ssl 
 sudo systemctl restart apache2
 
