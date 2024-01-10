@@ -1,6 +1,6 @@
 Ubuntu Golden Image
 
-"Ubuntu 20.04.3 LTS"		# cat /etc/lsb-release 					# Updated=19-July-2022
+"Ubuntu 22.04.3 LTS"		# cat /etc/lsb-release 					# Updated=10-Jan-2024
 
 # Updating to latest Ubuntu point release
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
