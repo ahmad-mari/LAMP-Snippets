@@ -60,12 +60,14 @@ cd /usr/local/src/drush
 sudo git checkout 8.3.0
 # For Version 9
 sudo git checkout 9.7.1
+# For Version 11
+sudo git checkout 11.6.0
 
 sudo ln -sf /usr/local/src/drush/drush /usr/bin/drush
 sudo composer install
 
 # Memcache install 
-sudo apt-get install memcached libmemcached-tools php-memcache php-memcached
+sudo apt-get install memcached libmemcached-tools php-memcache php-memcached -y
 sudo systemctl restart apache2 && sudo systemctl restart memcached && sudo systemctl enable memcached
 sudo nano /etc/memcached.conf 
 -m 128
