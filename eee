@@ -1,0 +1,17 @@
+    1  dnf install httpd
+    2  systemctl enable --now httpd
+    3  sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+    4  sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    5  sudo dnf upgrade
+    7  sudo yum -y install mariadb-server mariadb
+    8  sudo systemctl start mariadb && sudo systemctl enable mariadb.service
+   15  rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+   16  yum install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+   17  yum module enable php:remi-7.4 -ye
+   18  yum install -y php php-cli php-common
+   19  php -v
+
+
+
+
+sudo yum install -y  php74-php-fpm php74-php-gd php74-php-json php74-php-mbstring php74-php-mysqlnd php74-php-xml php74-php-xmlrpc php74-php-opcache php-mysql php-common php-pear php-devel gcc ImageMagick-devel ImageMagick-perl php-curl php-imap php-intl php-bcmath php-tidy php-xmlrpc php-readline php-enchant php-zip mod_ssl
