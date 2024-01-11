@@ -15,3 +15,8 @@
 
 sudo update-alternatives --set php /usr/bin/php7.4 && sudo update-alternatives --set phar /usr/bin/phar7.4 && sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.4 && sudo update-alternatives --set phpize /usr/bin/phpize7.4 && sudo update-alternatives --set php-config /usr/bin/php-config7.4
 sudo yum install -y  php74-php-fpm php74-php-gd php74-php-json php74-php-mbstring php74-php-mysqlnd php74-php-xml php74-php-xmlrpc php74-php-opcache php-mysql php-common php-pear php-devel gcc ImageMagick-devel ImageMagick-perl php-curl php-imap php-intl php-bcmath php-tidy php-xmlrpc php-readline php-enchant php-zip mod_ssl
+
+
+create database iiab_db;
+CREATE USER 'iiab_user'@'localhost' IDENTIFIED BY 'H@RDt0Knn0WPA$$W0rD';
+GRANT ALL PRIVILEGES ON iiab_db.* TO 'iiab_user'@'localhost';
