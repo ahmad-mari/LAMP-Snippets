@@ -1,0 +1,11 @@
+mkdir /usr/src/loader
+cd /usr/src/loader
+curl https://www.sourceguardian.com/loaders/download/loaders.linux-x86_64.tar.gz --output loaders.linux-x86_64.tar.gz
+tar xzf loaders.linux-x86_64.tar.gz
+cp ixed.7.4.lin /usr/lib/php/20210902/
+nano /etc/php/7.4/apache2/php.ini
+;extension=ixed.7.4.lin
+nano /etc/php/7.4/cli/php.ini
+;extension=ixed.7.4.lin
+sudo systemctl restart apache2
+service apache2 status
