@@ -1,0 +1,132 @@
+Ubuntu Golden Image
+
+"Ubuntu 20.04.3 LTS"		# cat /etc/lsb-release 					# Updated=19-July-2022
+
+# Updating to latest Ubuntu point release
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
+sudo reboot
+sudo apt-get autoremove -y && sudo apt-get autoclean -y
+sudo add-apt-repository universe &&  sudo add-apt-repository multiverse
+
+# Increase sudo timeout to 60 mins, instead of nagging every 5 mins for password
+sudo visudo
+	Change 
+	Defaults        env_reset
+	To
+	Defaults        env_reset, timestamp_timeout=60
+
+# Install usefull tools
+sudo apt-get install  -y imagemagick tasksel net-tools htop nano wget rsync git ncdu nload ranger iotop mdadm unzip iperf3 mlocate tree p7zip p7zip-full  p7zip-rar glances curl unzip zip -y
+sudo timedatectl set-timezone Asia/Amman
+wget http://www.home.unix-ag.org/simon/woof
+sudo cp woof /usr/bin/
+
+
+#Install apache2
+sudo apt install apache2
+sudo systemctl enable apache2
+
+
+# Enable self signed https protocol
+sudo a2enmod ssl 
+sudo a2ensite default-ssl
+sudo systemctl restart apache2
+
+# Installing PHP modules
+sudo apt install php -y
+sudo apt install php7.4 libapache2-mod-php7.4 php7.4-mbstring php7.4-mysql php7.4-xml php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl php7.4-pspell php7.4-sqlite3 php7.4-tidy php7.4-opcache php7.4-json php7.4-bz2 php7.4-readline php7.4-xmlrpc php7.4-enchant php7.4-xsl php-all-dev php7.4-zip php7.4-bcmath php7.4-imagick -y
+
+sudo a2enmod php7.4 && sudo systemctl restart apache2
+sudo a2enmod headers rewrite env mime expires ssl 
+sudo systemctl restart apache2
+
+#Install Mysql
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+sudo systemctl enable mysql
+
+
+#Create Database
+create database test_db;
+CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'PASSWORD';
+GRANT ALL PRIVILEGES ON test_db.* TO 'test_user'@'localhost';
+
+
+# Install composer
+sudo curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+sudo ln -s /usr/local/bin/composer /usr/bin/composer
+
+# Install node js & node npm
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install yarn
+#npm -version (6.5.0-next.0)
+#nodejs -v (v11.6.0)
+
+# Drush install 
+sudo git clone https://github.com/drush-ops/drush.git /usr/local/src/drush
+cd /usr/local/src/drush
+
+# For Version 8
+sudo git checkout 8.3.0
+# For Version 9
+sudo git checkout 9.7.1
+
+sudo ln -sf /usr/local/src/drush/drush /usr/bin/drush
+sudo composer install
+
+# Memcache install 
+sudo apt-get install memcached libmemcached-tools php-memcache php-memcached
+sudo systemctl restart apache2 && sudo systemctl restart memcached && sudo systemctl enable memcached
+sudo nano /etc/memcached.conf 
+-m 128
+# You can view Memcache Admin settings using a tool called Memcache Top:
+# wget https://github.com/eculver/memcache-top/archive/v0.7.zip
+
+-------------------------------------------------------------------------------------------
+
+###  Config
+## php.ini (/etc/php/7.4/apache2/php.ini)
+sudo nano /etc/php/7.4/apache2/php.ini
+max_execution_time = 300
+max_input_time = 180
+max_input_vars = 10000
+memory_limit = 512M
+error_reporting = E_ALL
+post_max_size = 64M
+upload_max_filesize = 64M
+max_file_uploads = 40
+date.timezone = Asia/Amman
+
+## opcache.ini (/etc/php/7.4/apache2/conf.d/10-opcache.ini)
+sudo nano /etc/php/7.4/apache2/conf.d/10-opcache.ini
+opcache.enable=1
+opcache.enable_cli=0
+opcache.memory_consumption=512
+opcache.max_accelerated_files=10000
+opcache.revalidate_freq=0
+
+# (optional) Restore old way of connecting to mysql using username and password (optional)
+sudo mysql
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_PASSWORD_HERE';
+FLUSH PRIVILEGES;
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+exit
+# Login using sudo mysql -uroot -p
+
+## In Drupal 8 sites Memcache example:
+nano /var/www/site/settings.php
+$settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
+$settings['memcache']['bins'] = ['default' => 'default'];
+$settings['memcache']['key_prefix'] = '';
+$settings['cache']['default'] = 'cache.backend.memcache';
+$settings['cache']['bins']['render'] = 'cache.backend.memcache';
+-------------------------------------------------------------------------------------------
+
+# Ubuntu Packages Cleanup
+sudo apt clean
+sudo apt autoclean
+sudo apt install -f
+sudo apt autoremove
