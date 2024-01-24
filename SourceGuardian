@@ -9,3 +9,6 @@ nano /etc/php/7.4/cli/php.ini
 ;extension=ixed.7.4.lin
 sudo systemctl restart apache2
 service apache2 status
+
+
+https://support.vimp.com/en/faq/items/installing-the-sourceguardian-php-extension-on-ubuntu-20-with-php-74-and-nginx.html
