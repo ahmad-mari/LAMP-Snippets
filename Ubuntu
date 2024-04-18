@@ -132,4 +132,4 @@ sudo dpkg -i mysql-apt-config_0.8.17-1_all.deb
 sudo apt-get update
 apt-get upgrade mysql-server
 
-
+GRANT ALL PRIVILEGES ON cvdb.* TO 'root'@'localhost';
