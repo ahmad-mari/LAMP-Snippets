@@ -120,3 +120,16 @@ sudo apt autoclean
 sudo apt install -f
 sudo apt autoremove
 
+
+
+
+
+
+----------------------
+
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.17-1_all.deb
+sudo apt-get update
+apt-get upgrade mysql-server
+
+
