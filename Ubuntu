@@ -33,9 +33,8 @@ sudo a2enmod ssl
 sudo systemctl restart apache2
 
 # Installing PHP modules
-sudo apt install php -y
-sudo apt install php libapache2-mod-php php-mbstring php-mysql php-xml php-cgi php-cli php-common php-curl php-gd php-imap php-intl php-pspell php-sqlite3 php-tidy php-opcache php-json php-bz2 php-readline php-xmlrpc php-enchant php-xsl php-all-dev php-zip php-bcmath php-imagick -y
-
+sudo apt install php8.1
+sudo apt install php8.1 libapache2-mod-php8.1 php8.1-mbstring  php8.1-mysql php8.1-xml php8.1-cgi php8.1-cli php8.1-common php8.1-curl php8.1-gd php8.1-imap php8.1-intl php8.1-pspell php8.1-sqlite3 php8.1-tidy php8.1-opcache php8.1-json php8.1-bz2 php8.1-readline php8.1-xmlrpc php8.1-enchant php8.1-xsl php-all-dev php8.1-zip
 sudo a2enmod php8.1 && sudo systemctl restart apache2
 sudo a2enmod headers rewrite env mime expires ssl 
 sudo systemctl restart apache2
